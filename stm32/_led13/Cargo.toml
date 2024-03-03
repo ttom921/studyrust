@@ -1,0 +1,38 @@
+[package]
+authors = ["ttom921 <ttom921@hotmail.com>"]
+edition = "2018"
+readme = "README.md"
+name = "led13"
+version = "0.1.0"
+
+[dependencies]
+# embedded-hal = "1.0.0"
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.3"
+cortex-m-semihosting = "0.5.0"
+panic-halt = "0.2.0"
+nb = "1.1.0"                   # stm32f103xx-hal 的异步阻塞模块，用来实现时钟等待同步
+
+# Uncomment for the panic example.
+# panic-itm = "0.4.1"
+
+# Uncomment for the allocator example.
+# alloc-cortex-m = "0.4.0"
+
+# Uncomment for the device example.
+# Update `memory.x`, set target to `thumbv7em-none-eabihf` in `.cargo/config`,
+# and then use `cargo build --examples device` to build it.
+[dependencies.stm32f1xx-hal]
+features = ["stm32f103", "rt", "medium"]
+version = "0.10.0"
+
+# this lets you use `cargo fix`!
+[[bin]]
+name = "led13"
+test = false
+bench = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true      # symbols are nice and they don't increase the size on Flash
+lto = true        # better optimizations
