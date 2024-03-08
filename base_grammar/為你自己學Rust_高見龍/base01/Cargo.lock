@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "study_rust_for_yourself"
+name = "base01"
 version = "0.1.0"

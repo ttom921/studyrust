@@ -3,21 +3,208 @@
 //
 //
 //
-//#region列舉Option 不只是個選項
-const BANK_BALANCE: u32 = 1000;
+//#region 套件（Crate）
+mod say_something;
 fn main() {
-    match withdraw(1000) {
-        Ok(amount) => println!("提領金頠 {}", amount),
-        Err(message) => println!("提領失敗 {}", message),
-    }
+    say_something::loudly("hello rust");
 }
-fn withdraw(amount: u32) -> Result<u32, String> {
-    if amount > BANK_BALANCE {
-        return Err(String::from("餘額不足"));
-    }
+//#endregion 套件（Crate）
 
-    Ok(amount)
-}
+//#region 模組（Module）
+// mod greeting{
+//     pub fn hi(){
+//         println!("Hi, Rust");
+//     }
+//     fn hey(){
+//         println!("Hey Rust");
+//     }
+// }
+// mod greeting {
+//     pub mod a {
+//         pub mod b {
+//             pub fn hi() {
+//                 println!("Hi,a b Rust")
+//             }
+//         }
+//     }
+// }
+
+// mod greeting {
+//     pub fn hi() {
+//         //super 是指目前這個模組的上一層。
+//         //super::say_something::loudly("Hi,Rust super");
+//         //crate 指的是當前專案的的最上層模組。
+//         crate::say_something::loudly("Hi,Rust crate")
+//     }
+// }
+// mod say_something {
+//     pub fn loudly(message: &str) {
+//         println!("{}!!!", message);
+//     }
+// }
+// //use greeting::a::b::hi;
+// fn main() {
+//     //greeting::hi();
+//     //greeting::a::b::hi();
+//     //hi();
+//     greeting::hi();
+// }
+//#endregion 模組（Module）
+//#region 測試（Test）
+// #[cfg(test)]
+// mod bim {
+//     use crate::bmi_calc;
+//     #[test]
+//     fn dummy() {
+//         let result = 1 + 2;
+//         assert_eq!(result, 3);
+//     }
+//     #[test]
+//     fn test_calc() {
+//         let result = bmi_calc(180, 65);
+//         assert_eq!(result, 20.1);
+//     }
+// }
+// fn bmi_calc<T, U>(height: T, weight: U) -> f64
+// where
+//     T: Into<f64>,
+//     U: Into<f64>,
+// {
+//     let h = height.into() / 100.0;
+//     let bmi = weight.into() / (h * h);
+//     (bmi * 10.0).round() / 10.0
+// }
+// fn main() {}
+//#endregion 測試（Test）
+
+//#region 屬性（Attributes）
+// #[derive(Debug)]
+// struct Cat {
+//     name: String,
+//     age: u8,
+// }
+// fn main() {
+//     let kitty = Cat {
+//         name: String::from("Kitty"),
+//         age: 18,
+//     };
+//     println!("{:?}", kitty);
+// }
+//#endregion 屬性（Attributes）
+//#region 錯誤處理（Error Handling）
+// const BANK_BALANCE: u32 = 1000;
+// fn withdraw(amount: u32) -> Result<u32, String> {
+//     if amount > BANK_BALANCE {
+//         return Err(String::from("餘額不足"));
+//     }
+
+//     Ok(amount)
+// }
+// fn main() {
+//     match withdraw(10000) {
+//         Ok(amount) => println!("提領金額 {} 元", amount),
+//         Err(_) => panic!("💣💥"),
+//     }
+// }
+
+// // fn main() {
+// //     hello();
+// // }
+
+// // fn hello() {
+// //     world();
+// // }
+
+// // fn world() {
+// //     hey();
+// // }
+
+// // fn hey() {
+// //     panic!("😱😱😱😱😱😱😱"); // 在這裡引爆
+// // }
+
+// // fn bmi_calculator<T, U>(height: T, weight: U) -> Result<f64, String>
+// // where
+// //     T: Into<f64>,
+// //     U: Into<f64>,
+// // {
+// //     let w = weight.into();
+// //     let h = height.into() / 100.0;
+
+// //     if w <= 0.0 || h < 0.0 {
+// //         return Err("輸入數值有誤".to_string());
+// //     }
+// //     Ok(w / (h * h))
+// // }
+// // fn main() {
+// //     panic!("😱😱😱😱😱😱😱");
+// //     // match bmi_calculator(170, 64.0) {
+// //     //     Ok(result) => println!("{:.2}", result),
+// //     //     Err(reason) => println!("{}", reason),
+// //     // }
+// // }
+
+//#endregion 錯誤處理（Error Handling）
+//#region 泛型（Generics）
+//參數也能泛型
+// fn add_number<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+//     a + b
+// }
+// use std::ops::Add;
+// fn add_number<T: Add<Output = T>>(a: T, b: T) -> T {
+//     a + b
+// }
+// fn calc<T: std::ops::Add<Output = T> + std::ops::Sub<Output = T>>(a: T, b: T, c: T) -> T {
+//     a + b - c
+// }
+// use std::ops::{Add, Sub};
+// // fn calc<T: Add<Output = T> + Sub<Output = T>>(a: T, b: T, c: T) -> T {
+// //     a + b - c
+// // }
+// //另一種寫法
+// fn calc<T>(a: T, b: T, c: T) -> T
+// where
+//     T: Add<Output = T> + Sub<Output = T>,
+// {
+//     a + b - c
+// }
+// fn main() {
+//     // let res = add_number(1, 2);
+//     // println!("{}", res);
+//     // println!("{}", add_number(3.1, 9.8));
+//     println!("{}", calc(1, 3, 1));
+// }
+// struct Rectangle<T> {
+//     width: T,
+//     height: T,
+// }
+// fn main() {
+//     let rect_a = Rectangle {
+//         width: 100,
+//         height: 50,
+//     };
+//     let rect_b = Rectangle {
+//         width: 38.5,
+//         height: 19.5,
+//     };
+// }
+//#endregion 泛型（Generics）
+
+//#region列舉Option 不只是個選項
+// const BANK_BALANCE: u32 = 1000;
+// fn main() {
+//     match withdraw(1000) {
+//         Ok(amount) => println!("提領金頠 {}", amount),
+//         Err(message) => println!("提領失敗 {}", message),
+//     }
+// }
+// fn withdraw(amount: u32) -> Result<u32, String> {
+//     if amount > BANK_BALANCE {
+//         return Err(String::from("餘額不足"));
+//     }
+
+//     Ok(amount)
+// }
 //寫法2
 // fn main() {
 //     let friends = get_friends(true);
