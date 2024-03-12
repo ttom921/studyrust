@@ -3,64 +3,98 @@
 //
 //
 //
-//#region 再看生命週期（Lifetime revisit）
-//Enum 裡的生命週期
-enum CatBreek<'a> {
-    Persian,           //波斯貓
-    AmericanShorthair, //美國短毛貓
-    Mix(&'a str, u8),  //米克斯
+//#region 把東西印出來！
+
+#[derive(Debug)]
+struct Cat {
+    name: String,
+    age: u8,
 }
 
-impl CatBreek<'_> {
-    fn say_something() {
-        println!("Hey!");
-    }
-}
-//泛型 + 生命週期
-struct Cat<'a, T> {
-    name: &'a str,
-    age: T,
-}
-impl<T> Cat<'_, T> {
-    fn say_hello(&self) {
-        println!("hello");
-    }
-}
-// struct Cat<'a> {
-//     name: &'a str,
-//     age: u8,
-// }
-
-// impl Cat<'_> {
-//     fn say_hello(&self) {
-//         println!("Hello");
-//     }
-// }
 // struct Cat {
 //     name: String,
 //     age: u8,
 // }
+// use std::fmt::{Display, Formatter, Result};
+// impl Display for Cat {
+//     fn fmt(&self, f: &mut Formatter) -> Result {
+//         write!(f, "貓兒:{}", self.name)
+//     }
+// }
 fn main() {
-    let cat_name = "Kitty"; //------------+ 'cat_name
-                            /////////////                 ////////                |
     let kitty = Cat {
-        //////////////////////////// /////////////--+ 'kitty  |
-        name: cat_name, //////////////////////  |         |
-        age: 12,        ///////////////////////  |         |
-    }; ///////////////////////////////////////  |         |
-       ///////////////////////////////////////  |         |
-    println!("{:?}", kitty.name); ////////////  |         |
-                                  ////////////--+         |
-                                  ////////////------------+
-                                  ///////////////////////////////////////
-                                  ///////////////////////////////////////
-                                  ///////////////////////////////////////
-
-    // let kitty = Cat {
-    //     name: String::from("Kitty"),
-    //     age: 12,
-    // };
+        name: String::from("Hellokitty"),
+        age: 12,
+    };
+    println!("{:?}", kitty);
+    //
+    println!("{:?}", 1);
+    println!("{:?}", false);
+    println!("{:?}", [1, 2, 3]);
+    println!("{:?}", vec![1, 2, 3]);
+    //
+    let message = format!("你好，我是 {}", "Hello Kitty");
+    println!("{}", message);
 }
+//#endregion 把東西印出來！
+// //#region 再看生命週期（Lifetime revisit）
+// //Enum 裡的生命週期
+// enum CatBreek<'a> {
+//     Persian,           //波斯貓
+//     AmericanShorthair, //美國短毛貓
+//     Mix(&'a str, u8),  //米克斯
+// }
+
+// impl CatBreek<'_> {
+//     fn say_something() {
+//         println!("Hey!");
+//     }
+// }
+// //泛型 + 生命週期
+// struct Cat<'a, T> {
+//     name: &'a str,
+//     age: T,
+// }
+// impl<T> Cat<'_, T> {
+//     fn say_hello(&self) {
+//         println!("hello");
+//     }
+// }
+// // struct Cat<'a> {
+// //     name: &'a str,
+// //     age: u8,
+// // }
+
+// // impl Cat<'_> {
+// //     fn say_hello(&self) {
+// //         println!("Hello");
+// //     }
+// // }
+// // struct Cat {
+// //     name: String,
+// //     age: u8,
+// // }
+// fn main() {
+//     let cat_name = "Kitty"; //------------+ 'cat_name
+//                             /////////////                 ////////                |
+//     let kitty = Cat {
+//         //////////////////////////// /////////////--+ 'kitty  |
+//         name: cat_name, //////////////////////  |         |
+//         age: 12,        ///////////////////////  |         |
+//     }; ///////////////////////////////////////  |         |
+//        ///////////////////////////////////////  |         |
+//     println!("{:?}", kitty.name); ////////////  |         |
+//                                   ////////////--+         |
+//                                   ////////////------------+
+//                                   ///////////////////////////////////////
+//                                   ///////////////////////////////////////
+//                                   ///////////////////////////////////////
+
+//     // let kitty = Cat {
+//     //     name: String::from("Kitty"),
+//     //     age: 12,
+//     // };
+// }
 //#endregion 再看生命週期（Lifetime revisit）
 //#region 套件（Crate）
 // mod say_something;
