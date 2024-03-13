@@ -3,39 +3,62 @@
 //
 //
 //
+
+//#region 閉包（Closure）
+fn main() {
+    //捕獲附近 Scope 的值
+    let n = 100;
+    let add_one = || n + 1;
+    println!("結果:{}", add_one());
+    // let add_numbers = |x, y| {
+    //     println!("Hello Rust!");
+    //     println!("Hello Again!");
+    //     //其它實作程式碼
+    //     x + y
+    // };
+    // println!("計算結果:{}", add_numbers(4, 5));
+    // //但接著故意傳浮點數給它的時候就會出錯了
+    // //println!("計算結果:{}", add_numbers(0.1, 0.3));//這個有問題，
+
+    // let add_number = |x, y| x + y;
+    // println!("計算結果：{}", add_number(3, 2));
+    // let say_hello = || println!("Hello Rust");
+    // say_hello();
+}
+//#endregion 閉包（Closure）
 //#region 把東西印出來！
 
-#[derive(Debug)]
-struct Cat {
-    name: String,
-    age: u8,
-}
-
+// #[derive(Debug)]
 // struct Cat {
 //     name: String,
 //     age: u8,
 // }
-// use std::fmt::{Display, Formatter, Result};
-// impl Display for Cat {
-//     fn fmt(&self, f: &mut Formatter) -> Result {
-//         write!(f, "貓兒:{}", self.name)
-//     }
+
+// // struct Cat {
+// //     name: String,
+// //     age: u8,
+// // }
+// // use std::fmt::{Display, Formatter, Result};
+// // impl Display for Cat {
+// //     fn fmt(&self, f: &mut Formatter) -> Result {
+// //         write!(f, "貓兒:{}", self.name)
+// //     }
+// // }
+// fn main() {
+//     let kitty = Cat {
+//         name: String::from("Hellokitty"),
+//         age: 12,
+//     };
+//     println!("{:?}", kitty);
+//     //
+//     println!("{:?}", 1);
+//     println!("{:?}", false);
+//     println!("{:?}", [1, 2, 3]);
+//     println!("{:?}", vec![1, 2, 3]);
+//     //
+//     let message = format!("你好，我是 {}", "Hello Kitty");
+//     println!("{}", message);
 // }
-fn main() {
-    let kitty = Cat {
-        name: String::from("Hellokitty"),
-        age: 12,
-    };
-    println!("{:?}", kitty);
-    //
-    println!("{:?}", 1);
-    println!("{:?}", false);
-    println!("{:?}", [1, 2, 3]);
-    println!("{:?}", vec![1, 2, 3]);
-    //
-    let message = format!("你好，我是 {}", "Hello Kitty");
-    println!("{}", message);
-}
 //#endregion 把東西印出來！
 // //#region 再看生命週期（Lifetime revisit）
 // //Enum 裡的生命週期
