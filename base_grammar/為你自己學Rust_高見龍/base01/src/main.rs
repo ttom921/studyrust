@@ -3,28 +3,54 @@
 //
 //
 //
+//#region 把函數丟來丟去的高階函數
 
-//#region 閉包（Closure）
-fn main() {
-    //捕獲附近 Scope 的值
-    let n = 100;
-    let add_one = || n + 1;
-    println!("結果:{}", add_one());
-    // let add_numbers = |x, y| {
-    //     println!("Hello Rust!");
-    //     println!("Hello Again!");
-    //     //其它實作程式碼
-    //     x + y
-    // };
-    // println!("計算結果:{}", add_numbers(4, 5));
-    // //但接著故意傳浮點數給它的時候就會出錯了
-    // //println!("計算結果:{}", add_numbers(0.1, 0.3));//這個有問題，
-
-    // let add_number = |x, y| x + y;
-    // println!("計算結果：{}", add_number(3, 2));
-    // let say_hello = || println!("Hello Rust");
-    // say_hello();
+// fn operation<F: Fn(i32, i32) -> i32>(n: i32, m: i32, op: F) -> i32 {
+//     op(n, m)
+// }
+//如果覺得有點囉嗦可用前面章節學過的 where 關鍵字來改寫：
+fn operation<F>(n: i32, m: i32, op: F) -> i32
+where
+    F: Fn(i32, i32) -> i32,
+{
+    op(n, m)
 }
+
+fn add(x: i32, y: i32) -> i32 {
+    x + y
+}
+fn main() {
+    let minus = |a, b| a - b;
+    let resutl1 = operation(10, 20, add);
+    let result2 = operation(10, 20, minus);
+    let result3 = operation(10, 20, |x, y| x * y);
+
+    println!("{}", resutl1);
+    println!("{}", result2);
+    println!("{}", result3);
+}
+//#endregion 把函數丟來丟去的高階函數
+//#region 閉包（Closure）
+// fn main() {
+//     //捕獲附近 Scope 的值
+//     let n = 100;
+//     let add_one = || n + 1;
+//     println!("結果:{}", add_one());
+//     // let add_numbers = |x, y| {
+//     //     println!("Hello Rust!");
+//     //     println!("Hello Again!");
+//     //     //其它實作程式碼
+//     //     x + y
+//     // };
+//     // println!("計算結果:{}", add_numbers(4, 5));
+//     // //但接著故意傳浮點數給它的時候就會出錯了
+//     // //println!("計算結果:{}", add_numbers(0.1, 0.3));//這個有問題，
+
+//     // let add_number = |x, y| x + y;
+//     // println!("計算結果：{}", add_number(3, 2));
+//     // let say_hello = || println!("Hello Rust");
+//     // say_hello();
+// }
 //#endregion 閉包（Closure）
 //#region 把東西印出來！
 
