@@ -1,0 +1,15 @@
+[package]
+edition = "2021"
+name = "hello-bmi"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# 可以是本機
+# calculator = {path = "../calculator"}
+# 可以是github
+# calculator = { git = "https://github.com/kaochenlong/bmi-calculator-lib.git", branch = "main" }
+
+# 可以改名
+bmi_calc = {path = "../calculator", package = "calculator"}

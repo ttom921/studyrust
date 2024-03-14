@@ -3,32 +3,112 @@
 //
 //
 //
+
+//#region 寫函式庫給自己跟別人用
+//#endregion 寫函式庫給自己跟別人用
+//建立函式庫
+// ```
+// cargo new calculator --lib
+// ```
+//專案裡開一個 tests/bmi_test.rs和src同一層的資料夾
+// ```
+// extern crate calculator;//任選一個
+// use calculator;//任選一個
+
+// #[test]
+// fn bmi_test() {
+//     let result = calculator::bmi(180, 65);
+//     assert_eq!(result, Ok(20.1))
+// }
+
+// #[test]
+// fn bmi_test_invalid() {
+//     let result = calculator::bmi(0, 65);
+//     assert!(result.is_err());
+// }
+// ```
+//實作補上，我直接寫在 src/lib.rs 裡：
+// ```
+// pub fn bmi<T, U>(height: T, weight: U) -> Result<f64, String>
+// where
+//     T: Into<f64>,
+//     U: Into<f64>,
+// {
+//     let h = height.into();
+//     let w = weight.into();
+
+//     if h <= 0.0 || w <= 0.0 {
+//         return Err("輸入值有誤".to_string());
+//     }
+
+//     let bmi = w / (h / 100.0 * h / 100.0);
+//     Ok((bmi * 10.0).round() / 10.0)
+// }
+// ```
+
+//不過如果你還沒打算上傳到 crates.io 的話，可以先在自己本機試玩看看。我們先開一個新的專案：
+// ```
+// cargo new hello-bmi
+// ```
+//接著打開 Cargo.toml，在 [dependencies] 段落底下加上套件的名稱以及它的路徑：
+// ```
+// [dependencies]
+// # 可以是本機
+// # calculator = {path = "../calculator"}
+// # 可以是github
+// # calculator = { git = "https://github.com/kaochenlong/bmi-calculator-lib.git", branch = "main" }
+
+// # 可以改名
+// bmi_calc = {path = "../calculator", package = "calculator"}
+// ```
+
+//接著編輯 src/main.rs 檔案：
+// ```
+// fn main() {
+//     //let result = calculator::bmi(170, 65);
+//     let result = bmi_calc::bmi(170, 65);
+//     match result {
+//         Ok(bmi) => {
+//             println!("BMI:{}", bmi);
+//         }
+//         Err(message) => {
+//             println!("{message}")
+//         }
+//     }
+// }
+// ```
+
+//是說，如果有個套件名稱你不喜歡或是覺得可讀性不太好，你沒辦法幫它改名字，但可以在引入使用的時候幫它改一下：
+// ```
+// [dependencies]
+// bmi_calc = { path = "/tmp/calculator", package = "calculator" }
+// ```
 //#region 把函數丟來丟去的高階函數
 
 // fn operation<F: Fn(i32, i32) -> i32>(n: i32, m: i32, op: F) -> i32 {
 //     op(n, m)
 // }
 //如果覺得有點囉嗦可用前面章節學過的 where 關鍵字來改寫：
-fn operation<F>(n: i32, m: i32, op: F) -> i32
-where
-    F: Fn(i32, i32) -> i32,
-{
-    op(n, m)
-}
+// fn operation<F>(n: i32, m: i32, op: F) -> i32
+// where
+//     F: Fn(i32, i32) -> i32,
+// {
+//     op(n, m)
+// }
 
-fn add(x: i32, y: i32) -> i32 {
-    x + y
-}
-fn main() {
-    let minus = |a, b| a - b;
-    let resutl1 = operation(10, 20, add);
-    let result2 = operation(10, 20, minus);
-    let result3 = operation(10, 20, |x, y| x * y);
+// fn add(x: i32, y: i32) -> i32 {
+//     x + y
+// }
+// fn main() {
+//     let minus = |a, b| a - b;
+//     let resutl1 = operation(10, 20, add);
+//     let result2 = operation(10, 20, minus);
+//     let result3 = operation(10, 20, |x, y| x * y);
 
-    println!("{}", resutl1);
-    println!("{}", result2);
-    println!("{}", result3);
-}
+//     println!("{}", resutl1);
+//     println!("{}", result2);
+//     println!("{}", result3);
+// }
 //#endregion 把函數丟來丟去的高階函數
 //#region 閉包（Closure）
 // fn main() {
