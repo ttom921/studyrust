@@ -55,39 +55,91 @@
 
 // region: 資料型態（原始型別 - 原始型別 - 陣列、元組）
 
+// fn main() {
+//     // let list: [u8; 3] = [1, 2, 3];
+//     // println!("{:?}", list);
+
+//     // let list: [u8; 3] = ['a', 2, 3];
+//     // println!("{:?}", list);
+
+//     //let list = [1, 2, 3];
+
+//     // let list = [1450, 9527, 5566];
+//     // println!("{}", list.len()); //印出3
+//     // println!("{}", list[1]); //印出9527
+
+//     // let list = [1450, 9527, 5566];
+//     // for item in list.iter() {
+//     //     println!("{}", item);
+//     // }
+
+//     // let list = [1450, 9527, 5566];
+//     // let [_, b, c] = list;
+//     // println!("{}", b);
+//     // println!("{}", c);
+
+//     //let point:(i32,i32,i32)=(100,200,300);
+
+//     // let answer: (char, bool) = ('🐈', false);
+//     // let pet = ('🐈', false);
+
+//     // let pet = ('🐈', false, 18);
+//     // println!("{} {} {}", pet.0, pet.1, pet.2);
+
+//     let point = (100, 200, 300);
+//     let (x, y, z) = point;
+//     println!("{} {} {}", x, y, z);
+// }
+// endregion: 資料型態（原始型別 - 原始型別 - 陣列、元組）
+
+// region: 變數與常數
 fn main() {
-    // let list: [u8; 3] = [1, 2, 3];
-    // println!("{:?}", list);
+    // let age: u8 = 20;
 
-    // let list: [u8; 3] = ['a', 2, 3];
-    // println!("{:?}", list);
+    // let age = 20;
+    // println!("{}", age); //印出20
 
-    //let list = [1, 2, 3];
+    // let age: u8;
+    // println!("{}", age);
 
-    // let list = [1450, 9527, 5566];
-    // println!("{}", list.len()); //印出3
-    // println!("{}", list[1]); //印出9527
+    // let age = 20;
+    // println!("{}", age);
 
-    // let list = [1450, 9527, 5566];
-    // for item in list.iter() {
-    //     println!("{}", item);
+    // age = 18; //改成18
+    // println!("{}", age);
+
+    // let mut age = 20; //加入 mut 修飾
+    // println!("{}", age);
+
+    // age = 18; //改成18
+    // println!("{}", age);
+
+    // let mut age = 20; //加入 mut 修飾
+    // println!("{}", age);
+
+    // let a = 10;
+
+    // if true {
+    //     println!("{}", a); //這個block裡面沒有變數a
+    // }
+    // println!("{}", a);
+
+    // let a = 10;
+    // if true {
+    //     let a = 20;
+    //     println!("{}", a); //這個block 裡面有變數a,所以印出 20
+    // }
+    // println!("{}", a); //不會受 if 裡的宣告所影響
+
+    // if true {
+    //     let a = 20;
     // }
 
-    // let list = [1450, 9527, 5566];
-    // let [_, b, c] = list;
-    // println!("{}", b);
-    // println!("{}", c);
+    // println!("{}", a);
 
-    //let point:(i32,i32,i32)=(100,200,300);
+    // const a=10;
 
-    // let answer: (char, bool) = ('🐈', false);
-    // let pet = ('🐈', false);
-
-    // let pet = ('🐈', false, 18);
-    // println!("{} {} {}", pet.0, pet.1, pet.2);
-
-    let point = (100, 200, 300);
-    let (x, y, z) = point;
-    println!("{} {} {}", x, y, z);
+    const my_age: u8 = 10;
+    println!("{}", my_age);
 }
-// endregion: 資料型態（原始型別 - 原始型別 - 陣列、元組）
+// endregion: 變數與常數
