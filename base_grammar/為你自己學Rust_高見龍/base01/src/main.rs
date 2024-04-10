@@ -179,30 +179,30 @@
 // endregion: 函數
 
 // region: Stack與Heap
-fn main() {
-    //draw(9527);
+// fn main() {
+//     //draw(9527);
 
-    // let mut list = vec![1, 2, 3];
-    // list.push(4);
+//     // let mut list = vec![1, 2, 3];
+//     // list.push(4);
 
-    // println!("{:?}", list);
+//     // println!("{:?}", list);
 
-    // let mut numbers = vec![1, 2, 3];
-    // println!("{},{}", numbers.len(), numbers.capacity());
+//     // let mut numbers = vec![1, 2, 3];
+//     // println!("{},{}", numbers.len(), numbers.capacity());
 
-    // numbers.push(1);
-    // println!("{},{}", numbers.len(), numbers.capacity());
+//     // numbers.push(1);
+//     // println!("{},{}", numbers.len(), numbers.capacity());
 
-    // numbers.push(1);
-    // numbers.push(1);
-    // println!("{},{}", numbers.len(), numbers.capacity());
+//     // numbers.push(1);
+//     // numbers.push(1);
+//     // println!("{},{}", numbers.len(), numbers.capacity());
 
-    // numbers.push(1);
-    // println!("{},{}", numbers.len(), numbers.capacity());
+//     // numbers.push(1);
+//     // println!("{},{}", numbers.len(), numbers.capacity());
 
-    let rooms: Vec<u8> = Vec::with_capacity(20);
-    println!("{},{}", rooms.len(), rooms.capacity());
-}
+//     let rooms: Vec<u8> = Vec::with_capacity(20);
+//     println!("{},{}", rooms.len(), rooms.capacity());
+// }
 
 // fn show_lotteries(n1: i32, n2: i32, n3: i32) {
 //     println!("the lottery numbers are {} {} {}", n1, n2, n3);
@@ -211,3 +211,107 @@ fn main() {
 //     show_lotteries(num + 1, num + 2, num + 3);
 // }
 // endregion: Stack與Heap
+
+// region: 所有權(Ownership)
+// fn main() {
+//     // let total = calc_score();
+//     // println!("{}", total);
+
+//     // let scores = get_scroes();
+//     // println!("{:?}", scores);
+
+//     // let scores = get_scroes();
+//     // let total_score = calc_score(&scores);
+//     // println!("{:?}", total_score);
+//     // println!("{:?}", scores);
+
+//     // let mut scores = vec![1456, 9527, 5566];
+//     // let total_score = calc_score(&scores);
+
+//     let mut book = String::from("為你自已學Rust");
+//     let b1 = &book;
+//     let b2 = &book;
+//     let b3 = &book;
+
+//     println!("{:?},{:?},{:?}", b1, b2, b3);
+// }
+// fn calc_score() -> i32 {
+//     let scores = vec![1450, 9527, 5566];
+//     let mut total = 0;
+
+//     for score in scores.iter() {
+//         total += score;
+//     }
+//     return total;
+// }
+// fn calc_score(scores: &Vec<i32>) -> i32 {
+//     let mut total = 0;
+//     for score in scores.iter() {
+//         total += score;
+//     }
+//     return total;
+// }
+// fn get_scroes() -> Vec<i32> {
+//     let scores = vec![1450, 9527, 5566];
+//     return scores; //自動䆁放佔用的記憶體
+// }
+// fn calc_score(scores: &mut Vec<i32>) -> i32 {
+//     scores.push(123); //加料
+//     let mut total = 0;
+//     for score in scores.iter() {
+//         total += score;
+//     }
+//     return total;
+// }
+// endregion: 所有權(Ownership)
+
+// region: 切片(Slice)
+fn main() {
+    // let lost_numbers = [4, 8, 15, 16, 23, 42];
+    // let slice1 = &lost_numbers[0..3];
+    // let slice2 = &lost_numbers[4..6];
+
+    // println!("{:?}", slice1); //印出[4,8,15]
+    // println!("{:?}", slice2); //印出[23,42]
+
+    // let lost_numbers = [4, 8, 15, 16, 23, 42];
+    // let first_two_nums = &lost_numbers[..2]; //前2個
+    // let last_tree_nums = &lost_numbers[lost_numbers.len() - 3..]; //後3個
+
+    // println!("{:?}", first_two_nums); //印出[4,8]
+    // println!("{:?}", last_tree_nums); //印出[16,23,42]
+
+    // let numbers = &lost_numbers[..];
+    // println!("{:?}", numbers);
+
+    // let mut lost_numbers = vec![4, 8, 15, 16, 23, 42];
+    // let nums = &lost_numbers[0..3];
+    // nums[0] = 123;
+    // println!("{:?}", nums);//有error
+
+    // let mut lost_numbers = vec![4, 8, 15, 16, 23, 42];
+    // let nums = &mut lost_numbers[0..3];
+    // nums[0] = 5566;
+    // println!("{:?}", lost_numbers);
+
+    // let book = "為你自己學 Rust";
+    // publish_book(book);
+
+    // let scores = [88, 12, 39, 15, 10, 28, 92];
+    // let group1 = &scores[0..2]; //[88,12]
+    // let group2 = &scores[2..]; //[39,15,10,28,92]
+    // println!("{}", calc_score(group1));
+    // println!("{}", calc_score(group2));
+
+    let book: String = String::from("為你自己學 Rust");
+    println!("{}", book);
+}
+
+// fn publish_book(book: &str) {
+//     println!("{:?} 要上市囉！", book);
+// }
+
+// fn calc_score(scores: &[u16]) -> u16 {
+//     scores.iter().sum()
+// }
+// endregion: 切片(Slice)
