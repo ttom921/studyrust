@@ -266,46 +266,46 @@
 // endregion: 所有權(Ownership)
 
 // region: 切片(Slice)
-fn main() {
-    // let lost_numbers = [4, 8, 15, 16, 23, 42];
-    // let slice1 = &lost_numbers[0..3];
-    // let slice2 = &lost_numbers[4..6];
+// fn main() {
+//     // let lost_numbers = [4, 8, 15, 16, 23, 42];
+//     // let slice1 = &lost_numbers[0..3];
+//     // let slice2 = &lost_numbers[4..6];
 
-    // println!("{:?}", slice1); //印出[4,8,15]
-    // println!("{:?}", slice2); //印出[23,42]
+//     // println!("{:?}", slice1); //印出[4,8,15]
+//     // println!("{:?}", slice2); //印出[23,42]
 
-    // let lost_numbers = [4, 8, 15, 16, 23, 42];
-    // let first_two_nums = &lost_numbers[..2]; //前2個
-    // let last_tree_nums = &lost_numbers[lost_numbers.len() - 3..]; //後3個
+//     // let lost_numbers = [4, 8, 15, 16, 23, 42];
+//     // let first_two_nums = &lost_numbers[..2]; //前2個
+//     // let last_tree_nums = &lost_numbers[lost_numbers.len() - 3..]; //後3個
 
-    // println!("{:?}", first_two_nums); //印出[4,8]
-    // println!("{:?}", last_tree_nums); //印出[16,23,42]
+//     // println!("{:?}", first_two_nums); //印出[4,8]
+//     // println!("{:?}", last_tree_nums); //印出[16,23,42]
 
-    // let numbers = &lost_numbers[..];
-    // println!("{:?}", numbers);
+//     // let numbers = &lost_numbers[..];
+//     // println!("{:?}", numbers);
 
-    // let mut lost_numbers = vec![4, 8, 15, 16, 23, 42];
-    // let nums = &lost_numbers[0..3];
-    // nums[0] = 123;
-    // println!("{:?}", nums);//有error
+//     // let mut lost_numbers = vec![4, 8, 15, 16, 23, 42];
+//     // let nums = &lost_numbers[0..3];
+//     // nums[0] = 123;
+//     // println!("{:?}", nums);//有error
 
-    // let mut lost_numbers = vec![4, 8, 15, 16, 23, 42];
-    // let nums = &mut lost_numbers[0..3];
-    // nums[0] = 5566;
-    // println!("{:?}", lost_numbers);
+//     // let mut lost_numbers = vec![4, 8, 15, 16, 23, 42];
+//     // let nums = &mut lost_numbers[0..3];
+//     // nums[0] = 5566;
+//     // println!("{:?}", lost_numbers);
 
-    // let book = "為你自己學 Rust";
-    // publish_book(book);
+//     // let book = "為你自己學 Rust";
+//     // publish_book(book);
 
-    // let scores = [88, 12, 39, 15, 10, 28, 92];
-    // let group1 = &scores[0..2]; //[88,12]
-    // let group2 = &scores[2..]; //[39,15,10,28,92]
-    // println!("{}", calc_score(group1));
-    // println!("{}", calc_score(group2));
+//     // let scores = [88, 12, 39, 15, 10, 28, 92];
+//     // let group1 = &scores[0..2]; //[88,12]
+//     // let group2 = &scores[2..]; //[39,15,10,28,92]
+//     // println!("{}", calc_score(group1));
+//     // println!("{}", calc_score(group2));
 
-    let book: String = String::from("為你自己學 Rust");
-    println!("{}", book);
-}
+//     let book: String = String::from("為你自己學 Rust");
+//     println!("{}", book);
+// }
 
 // fn publish_book(book: &str) {
 //     println!("{:?} 要上市囉！", book);
@@ -315,3 +315,80 @@ fn main() {
 //     scores.iter().sum()
 // }
 // endregion: 切片(Slice)
+
+// region: 結構（Struct）
+struct Cat {
+    name: String,
+    age: u8,
+    is_sleeping: bool,
+}
+impl Cat {
+    fn greeting(&self) {
+        println!("Hello,my name is {}", self.name);
+    }
+    fn set_age(&mut self, age: u8) {
+        self.age = age;
+    }
+    fn run() {
+        println!("Go Go Power Rangers");
+    }
+    fn count(list: &[u8]) -> u8 {
+        list.iter().sum()
+    }
+}
+// struct dog {
+//     NAME: String,
+//     Age: u8,
+// }
+fn main() {
+    // let kitty = Cat {
+    //     name: String::from("Kitty"),
+    //     age: 12,
+    //     is_sleeping: true,
+    // };
+    // let name = String::from("kitty");
+    // let age = 12;
+    // let is_sleeping = true;
+    // let kitty = Cat {
+    //     name,
+    //     age,
+    //     is_sleeping,
+    // };
+    // println!("{}", kitty.name);
+    // println!("{}", kitty.age);
+    //println!("{}", kitty.is_sleeping);
+
+    //kitty.age = 20;
+
+    // let name = String::from("kitty");
+    // let age = 12;
+    // let is_sleeping = true;
+    // let mut kitty = Cat {
+    //     name,
+    //     age,
+    //     is_sleeping,
+    // };
+    // kitty.age = 20;
+
+    // println!("{}", kitty.name);
+    // println!("{}", kitty.age);
+    // println!("{}", kitty.is_sleeping);
+
+    let mut kitty = Cat {
+        name: String::from("Kitty"),
+        age: 12,
+        is_sleeping: true,
+    };
+
+    kitty.greeting(); // 印出 Hello, my name is Kitty
+    kitty.set_age(21);
+
+    println!("{}", kitty.name);
+    println!("{}", kitty.age);
+    println!("{}", kitty.is_sleeping);
+    Cat::run();
+
+    let result = Cat::count(&[10, 20, 30]);
+    println!("{}", result); //印出60
+}
+// endregion: 結構（Struct）
