@@ -317,78 +317,147 @@
 // endregion: 切片(Slice)
 
 // region: 結構（Struct）
-struct Cat {
-    name: String,
-    age: u8,
-    is_sleeping: bool,
-}
-impl Cat {
-    fn greeting(&self) {
-        println!("Hello,my name is {}", self.name);
-    }
-    fn set_age(&mut self, age: u8) {
-        self.age = age;
-    }
-    fn run() {
-        println!("Go Go Power Rangers");
-    }
-    fn count(list: &[u8]) -> u8 {
-        list.iter().sum()
-    }
-}
+// struct Cat {
+//     name: String,
+//     age: u8,
+//     is_sleeping: bool,
+// }
+// impl Cat {
+//     fn greeting(&self) {
+//         println!("Hello,my name is {}", self.name);
+//     }
+//     fn set_age(&mut self, age: u8) {
+//         self.age = age;
+//     }
+//     fn run() {
+//         println!("Go Go Power Rangers");
+//     }
+//     fn count(list: &[u8]) -> u8 {
+//         list.iter().sum()
+//     }
+// }
 // struct dog {
 //     NAME: String,
 //     Age: u8,
 // }
+// fn main() {
+//     // let kitty = Cat {
+//     //     name: String::from("Kitty"),
+//     //     age: 12,
+//     //     is_sleeping: true,
+//     // };
+//     // let name = String::from("kitty");
+//     // let age = 12;
+//     // let is_sleeping = true;
+//     // let kitty = Cat {
+//     //     name,
+//     //     age,
+//     //     is_sleeping,
+//     // };
+//     // println!("{}", kitty.name);
+//     // println!("{}", kitty.age);
+//     //println!("{}", kitty.is_sleeping);
+
+//     //kitty.age = 20;
+
+//     // let name = String::from("kitty");
+//     // let age = 12;
+//     // let is_sleeping = true;
+//     // let mut kitty = Cat {
+//     //     name,
+//     //     age,
+//     //     is_sleeping,
+//     // };
+//     // kitty.age = 20;
+
+//     // println!("{}", kitty.name);
+//     // println!("{}", kitty.age);
+//     // println!("{}", kitty.is_sleeping);
+
+//     let mut kitty = Cat {
+//         name: String::from("Kitty"),
+//         age: 12,
+//         is_sleeping: true,
+//     };
+
+//     kitty.greeting(); // 印出 Hello, my name is Kitty
+//     kitty.set_age(21);
+
+//     println!("{}", kitty.name);
+//     println!("{}", kitty.age);
+//     println!("{}", kitty.is_sleeping);
+//     Cat::run();
+
+//     let result = Cat::count(&[10, 20, 30]);
+//     println!("{}", result); //印出60
+// }
+
+// region: 生命週期（Lifetime）
+
+struct Cat {
+    name: String,
+    age: u8,
+}
+
 fn main() {
-    // let kitty = Cat {
-    //     name: String::from("Kitty"),
-    //     age: 12,
-    //     is_sleeping: true,
-    // };
-    // let name = String::from("kitty");
-    // let age = 12;
-    // let is_sleeping = true;
-    // let kitty = Cat {
-    //     name,
-    //     age,
-    //     is_sleeping,
-    // };
-    // println!("{}", kitty.name);
-    // println!("{}", kitty.age);
-    //println!("{}", kitty.is_sleeping);
+    //print_age();
 
-    //kitty.age = 20;
-
-    // let name = String::from("kitty");
-    // let age = 12;
-    // let is_sleeping = true;
-    // let mut kitty = Cat {
-    //     name,
-    //     age,
-    //     is_sleeping,
-    // };
-    // kitty.age = 20;
-
-    // println!("{}", kitty.name);
-    // println!("{}", kitty.age);
-    // println!("{}", kitty.is_sleeping);
-
-    let mut kitty = Cat {
-        name: String::from("Kitty"),
+    let kitty = Cat {
+        name: "kitty".to_string(),
         age: 12,
-        is_sleeping: true,
+    };
+    let nancy = Cat {
+        name: "Nancy".to_string(),
+        age: 16,
     };
 
-    kitty.greeting(); // 印出 Hello, my name is Kitty
-    kitty.set_age(21);
-
-    println!("{}", kitty.name);
-    println!("{}", kitty.age);
-    println!("{}", kitty.is_sleeping);
-    Cat::run();
-
-    let result = Cat::count(&[10, 20, 30]);
-    println!("{}", result); //印出60
+    let boss = boss_cat(&kitty, &nancy);
+    println!("{}", boss.name);
 }
-// endregion: 結構（Struct）
+
+// fn boss_cat(c1: &Cat, c2: &Cat) -> &Cat {
+//     if c1.age > c2.age {
+//         c1
+//     } else {
+//         c2
+//     }
+// }
+
+fn boss_cat<'a>(c1: &'a Cat, c2: &'a Cat) -> &'a Cat {
+    if c1.age > c2.age {
+        c1
+    } else {
+        c2
+    }
+}
+// fn print_age() {
+//     let age = 12; ////////-----------------+- 'age
+//                   /////////////                 |
+//     let my_age = &age; //-----+- 'my_age  |
+//                        ////////     |           |
+//     println!("{}", my_age); ///     |           |
+//                             ///-----+           |
+// } /////////////////////////////-----------------+
+
+// fn print_age() {
+//     let my_age;
+//     {
+//         let age = 12;
+//         my_age = &age;
+//     }
+//     println!("{}", my_age);
+// }
+//
+// fn print_age() {
+//     let my_age; ///////---------------+-- 'my_age
+//                 /////////////               |
+//     {
+//         /////////////////////               |
+//         let age = 12; //------+ 'age   |
+//         my_age = &age; //////      |        |
+//     } ///////////////////////------+        |
+//       ///////////////////////               |
+//     println!("{}", my_age); //              |
+// } ///////////////////////////---------------+
+
+// region: 生命週期（Lifetime）
