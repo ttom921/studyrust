@@ -391,29 +391,30 @@
 //     let result = Cat::count(&[10, 20, 30]);
 //     println!("{}", result); //印出60
 // }
+// endregion: 結構（Struct）
 
 // region: 生命週期（Lifetime）
 
-struct Cat {
-    name: String,
-    age: u8,
-}
+// struct Cat {
+//     name: String,
+//     age: u8,
+// }
 
-fn main() {
-    //print_age();
+// fn main() {
+//     //print_age();
 
-    let kitty = Cat {
-        name: "kitty".to_string(),
-        age: 12,
-    };
-    let nancy = Cat {
-        name: "Nancy".to_string(),
-        age: 16,
-    };
+//     let kitty = Cat {
+//         name: "kitty".to_string(),
+//         age: 12,
+//     };
+//     let nancy = Cat {
+//         name: "Nancy".to_string(),
+//         age: 16,
+//     };
 
-    let boss = boss_cat(&kitty, &nancy);
-    println!("{}", boss.name);
-}
+//     let boss = boss_cat(&kitty, &nancy);
+//     println!("{}", boss.name);
+// }
 
 // fn boss_cat(c1: &Cat, c2: &Cat) -> &Cat {
 //     if c1.age > c2.age {
@@ -423,13 +424,13 @@ fn main() {
 //     }
 // }
 
-fn boss_cat<'a>(c1: &'a Cat, c2: &'a Cat) -> &'a Cat {
-    if c1.age > c2.age {
-        c1
-    } else {
-        c2
-    }
-}
+// fn boss_cat<'a>(c1: &'a Cat, c2: &'a Cat) -> &'a Cat {
+//     if c1.age > c2.age {
+//         c1
+//     } else {
+//         c2
+//     }
+// }
 // fn print_age() {
 //     let age = 12; ////////-----------------+- 'age
 //                   /////////////                 |
@@ -460,4 +461,88 @@ fn boss_cat<'a>(c1: &'a Cat, c2: &'a Cat) -> &'a Cat {
 //     println!("{}", my_age); //              |
 // } ///////////////////////////---------------+
 
-// region: 生命週期（Lifetime）
+// endregion: 生命週期（Lifetime）
+
+// region: 特徵（Trait）
+trait Flable {
+    // fn fly(&self);
+    fn fly(&self) {
+        println!("飛呀～飛呀～小飛俠");
+    }
+}
+trait Greeting {
+    // fn say_hello(&self) {
+    //     println!("你好，我是{}", self.name);
+    // }
+    fn say_hello(&self) {
+        println!("你好，我是{}", self.name());
+    }
+    fn name(&self) -> &str;
+}
+trait Animal {
+    fn sleep(&self);
+}
+// impl Flable for Cat {
+//     // 實作內容在這裡
+//     // fn fly(&self) {
+//     //     println!("嘿，我是{}, 你看我會飛，你不會", self.name);
+//     // }
+//     // fn hey(&self) {
+//     //     println!("How you doing");
+//     // }
+// }
+impl Flable for Cat {}
+//impl Flable for Dog {}
+
+impl Greeting for Cat {
+    fn name(&self) -> &str {
+        self.name.as_str()
+    }
+}
+impl Greeting for Dog {
+    fn name(&self) -> &str {
+        self.name.as_str()
+    }
+}
+impl Animal for Cat {
+    fn sleep(&self) {
+        println!("{} Zzzzzz", self.name);
+    }
+}
+struct Cat {
+    name: String,
+    age: u8,
+}
+struct Dog {
+    name: String,
+    age: u8,
+}
+
+fn bungee(someone: &dyn Flable) {
+    someone.fly();
+}
+fn main() {
+    // let kitty = Cat {
+    //     name: String::from("Kitty"),
+    //     age: 18,
+    // };
+    // kitty.fly(); // 印出 嘿，我是 Kitty，你看我會飛，你不會！
+    let kitty = Cat {
+        name: String::from("Kitty"),
+        age: 18,
+    };
+    let lucky = Dog {
+        name: String::from("lucky"),
+        age: 17,
+    };
+    // kitty.fly();
+    // lucky.fly();
+    //
+    // kitty.say_hello();
+    // lucky.say_hello();
+    //bungee(&kitty);
+    //bungee(&lucky);
+
+    kitty.sleep();
+}
+// endregion: 特徵（Trait）
