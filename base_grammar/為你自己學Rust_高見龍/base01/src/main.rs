@@ -464,85 +464,175 @@
 // endregion: 生命週期（Lifetime）
 
 // region: 特徵（Trait）
-trait Flable {
-    // fn fly(&self);
-    fn fly(&self) {
-        println!("飛呀～飛呀～小飛俠");
-    }
-}
-trait Greeting {
-    // fn say_hello(&self) {
-    //     println!("你好，我是{}", self.name);
-    // }
-    fn say_hello(&self) {
-        println!("你好，我是{}", self.name());
-    }
-    fn name(&self) -> &str;
-}
-trait Animal {
-    fn sleep(&self);
-}
-// impl Flable for Cat {
-//     // 實作內容在這裡
-//     // fn fly(&self) {
-//     //     println!("嘿，我是{}, 你看我會飛，你不會", self.name);
-//     // }
-//     // fn hey(&self) {
-//     //     println!("How you doing");
-//     // }
+// trait Flable {
+//     // fn fly(&self);
+//     fn fly(&self) {
+//         println!("飛呀～飛呀～小飛俠");
+//     }
 // }
-impl Flable for Cat {}
-//impl Flable for Dog {}
+// trait Greeting {
+//     // fn say_hello(&self) {
+//     //     println!("你好，我是{}", self.name);
+//     // }
+//     fn say_hello(&self) {
+//         println!("你好，我是{}", self.name());
+//     }
+//     fn name(&self) -> &str;
+// }
+// trait Animal {
+//     fn sleep(&self);
+// }
+// // impl Flable for Cat {
+// //     // 實作內容在這裡
+// //     // fn fly(&self) {
+// //     //     println!("嘿，我是{}, 你看我會飛，你不會", self.name);
+// //     // }
+// //     // fn hey(&self) {
+// //     //     println!("How you doing");
+// //     // }
+// // }
+// impl Flable for Cat {}
+// //impl Flable for Dog {}
 
-impl Greeting for Cat {
-    fn name(&self) -> &str {
-        self.name.as_str()
-    }
-}
-impl Greeting for Dog {
-    fn name(&self) -> &str {
-        self.name.as_str()
-    }
-}
-impl Animal for Cat {
-    fn sleep(&self) {
-        println!("{} Zzzzzz", self.name);
-    }
-}
-struct Cat {
-    name: String,
-    age: u8,
-}
-struct Dog {
-    name: String,
-    age: u8,
-}
+// impl Greeting for Cat {
+//     fn name(&self) -> &str {
+//         self.name.as_str()
+//     }
+// }
+// impl Greeting for Dog {
+//     fn name(&self) -> &str {
+//         self.name.as_str()
+//     }
+// }
+// impl Animal for Cat {
+//     fn sleep(&self) {
+//         println!("{} Zzzzzz", self.name);
+//     }
+// }
+// struct Cat {
+//     name: String,
+//     age: u8,
+// }
+// struct Dog {
+//     name: String,
+//     age: u8,
+// }
 
-fn bungee(someone: &dyn Flable) {
-    someone.fly();
+// fn bungee(someone: &dyn Flable) {
+//     someone.fly();
+// }
+// fn main() {
+//     // let kitty = Cat {
+//     //     name: String::from("Kitty"),
+//     //     age: 18,
+//     // };
+//     // kitty.fly(); // 印出 嘿，我是 Kitty，你看我會飛，你不會！
+//     let kitty = Cat {
+//         name: String::from("Kitty"),
+//         age: 18,
+//     };
+//     let lucky = Dog {
+//         name: String::from("lucky"),
+//         age: 17,
+//     };
+//     // kitty.fly();
+//     // lucky.fly();
+//     //
+//     // kitty.say_hello();
+//     // lucky.say_hello();
+//     //bungee(&kitty);
+//     //bungee(&lucky);
+
+//     kitty.sleep();
+// }
+// endregion: 特徵（Trait）
+// region: 列舉（Enum）
+// enum CatBreed {
+//     Persian,           //波斯貓
+//     AmericanShorthair, //美國短毛貓
+//     Mix,               //米克斯
+// }
+
+// #[allow(dead_code)]
+// enum CatBreed {
+//     Persian,           //波斯貓
+//     AmericanShorthair, //美國短毛貓
+//     Mix(String, u8),   //米克斯
+// }
+struct Skill {
+    action: String,
+}
+enum CatBreed {
+    Persian,              //波斯貓
+    AmericanShorthair,    //美國短毛貓
+    Mix(String, u8),      //米克斯
+    Other(Skill),         //其它
+    Alien { power: u32 }, //外星貓
+}
+impl CatBreed {
+    fn go(&self) {
+        println!("Go!");
+    }
 }
 fn main() {
-    // let kitty = Cat {
-    //     name: String::from("Kitty"),
-    //     age: 18,
-    // };
-    // kitty.fly(); // 印出 嘿，我是 Kitty，你看我會飛，你不會！
-    let kitty = Cat {
-        name: String::from("Kitty"),
-        age: 18,
-    };
-    let lucky = Dog {
-        name: String::from("lucky"),
-        age: 17,
-    };
-    // kitty.fly();
-    // lucky.fly();
-    //
-    // kitty.say_hello();
-    // lucky.say_hello();
-    //bungee(&kitty);
-    //bungee(&lucky);
+    //let breed = CatBreed::Persian;
+    // match breed {
+    //     CatBreed::Persian => {
+    //         println!("我是波斯貓");
+    //     }
+    //     CatBreed::AmericanShorthair => {
+    //         println!("我是美國短毛貓");
+    //     }
+    //     CatBreed::Mix => {
+    //         println!("我是米克斯");
+    //     }
+    // }
+    // match breed {
+    //     CatBreed::Persian => println!("我是波斯貓"),
+    //     CatBreed::AmericanShorthair => println!("我是美國短毛貓"),
+    //     CatBreed::Mix => println!("我是米克斯"),
+    // }
 
-    kitty.sleep();
+    // match breed {
+    //     CatBreed::Persian => println!("我是波斯貓"),
+    //     CatBreed::AmericanShorthair => println!("我是美國短毛貓"),
+    // }
+
+    // match breed {
+    //     CatBreed::Mix => println!("我是米克斯"),
+    //     _ => println!("我是品種貓"),
+    // }
+
+    // match breed {
+    //     _ => println!("我是品種貓"),
+    //     CatBreed::Mix => println!("我是米克斯"),
+    // }
+
+    // let kitty = CatBreed::Mix(String::from("kitty"), 8);
+    // let nancy = CatBreed::Persian;
+    // greeting(&kitty);
+    // greeting(&nancy);
+
+    let goku_cat = CatBreed::Other(Skill {
+        action: "龜派氣功".to_string(),
+    });
+    let frieza_cat = CatBreed::Alien { power: 530000 }; //戰鬥力53萬
+    greeting(&goku_cat);
+    greeting(&frieza_cat);
+    frieza_cat.go();
 }
-// endregion: 特徵（Trait）
+// fn greeting(cat: &CatBreed) {
+//     match cat {
+//         CatBreed::Mix(name, age) => println!("我是米克斯, 我叫{} 我今年{} 歲", name, age),
+//         _ => println!("我是品種貓"),
+//     }
+// }
+fn greeting(cat: &CatBreed) {
+    match cat {
+        CatBreed::Mix(name, age) => println!("我是米克斯, 我叫{} 我今年{} 歲", name, age),
+        CatBreed::Other(skill) => println!("使出絕招{}", skill.action),
+        CatBreed::Alien { power } => println!("我是戰鬥力是{}", power),
+        _ => println!("我是品種貓"),
+    }
+}
+// endregion: 列舉（Enum）
