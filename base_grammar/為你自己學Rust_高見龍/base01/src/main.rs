@@ -559,80 +559,140 @@
 //     AmericanShorthair, //美國短毛貓
 //     Mix(String, u8),   //米克斯
 // }
-struct Skill {
-    action: String,
-}
-enum CatBreed {
-    Persian,              //波斯貓
-    AmericanShorthair,    //美國短毛貓
-    Mix(String, u8),      //米克斯
-    Other(Skill),         //其它
-    Alien { power: u32 }, //外星貓
-}
-impl CatBreed {
-    fn go(&self) {
-        println!("Go!");
-    }
-}
-fn main() {
-    //let breed = CatBreed::Persian;
-    // match breed {
-    //     CatBreed::Persian => {
-    //         println!("我是波斯貓");
-    //     }
-    //     CatBreed::AmericanShorthair => {
-    //         println!("我是美國短毛貓");
-    //     }
-    //     CatBreed::Mix => {
-    //         println!("我是米克斯");
-    //     }
-    // }
-    // match breed {
-    //     CatBreed::Persian => println!("我是波斯貓"),
-    //     CatBreed::AmericanShorthair => println!("我是美國短毛貓"),
-    //     CatBreed::Mix => println!("我是米克斯"),
-    // }
+// struct Skill {
+//     action: String,
+// }
+// enum CatBreed {
+//     Persian,              //波斯貓
+//     AmericanShorthair,    //美國短毛貓
+//     Mix(String, u8),      //米克斯
+//     Other(Skill),         //其它
+//     Alien { power: u32 }, //外星貓
+// }
+// impl CatBreed {
+//     fn go(&self) {
+//         println!("Go!");
+//     }
+// }
+// fn main() {
+//     //let breed = CatBreed::Persian;
+//     // match breed {
+//     //     CatBreed::Persian => {
+//     //         println!("我是波斯貓");
+//     //     }
+//     //     CatBreed::AmericanShorthair => {
+//     //         println!("我是美國短毛貓");
+//     //     }
+//     //     CatBreed::Mix => {
+//     //         println!("我是米克斯");
+//     //     }
+//     // }
+//     // match breed {
+//     //     CatBreed::Persian => println!("我是波斯貓"),
+//     //     CatBreed::AmericanShorthair => println!("我是美國短毛貓"),
+//     //     CatBreed::Mix => println!("我是米克斯"),
+//     // }
 
-    // match breed {
-    //     CatBreed::Persian => println!("我是波斯貓"),
-    //     CatBreed::AmericanShorthair => println!("我是美國短毛貓"),
-    // }
+//     // match breed {
+//     //     CatBreed::Persian => println!("我是波斯貓"),
+//     //     CatBreed::AmericanShorthair => println!("我是美國短毛貓"),
+//     // }
 
-    // match breed {
-    //     CatBreed::Mix => println!("我是米克斯"),
-    //     _ => println!("我是品種貓"),
-    // }
+//     // match breed {
+//     //     CatBreed::Mix => println!("我是米克斯"),
+//     //     _ => println!("我是品種貓"),
+//     // }
 
-    // match breed {
-    //     _ => println!("我是品種貓"),
-    //     CatBreed::Mix => println!("我是米克斯"),
-    // }
+//     // match breed {
+//     //     _ => println!("我是品種貓"),
+//     //     CatBreed::Mix => println!("我是米克斯"),
+//     // }
 
-    // let kitty = CatBreed::Mix(String::from("kitty"), 8);
-    // let nancy = CatBreed::Persian;
-    // greeting(&kitty);
-    // greeting(&nancy);
+//     // let kitty = CatBreed::Mix(String::from("kitty"), 8);
+//     // let nancy = CatBreed::Persian;
+//     // greeting(&kitty);
+//     // greeting(&nancy);
 
-    let goku_cat = CatBreed::Other(Skill {
-        action: "龜派氣功".to_string(),
-    });
-    let frieza_cat = CatBreed::Alien { power: 530000 }; //戰鬥力53萬
-    greeting(&goku_cat);
-    greeting(&frieza_cat);
-    frieza_cat.go();
-}
+//     let goku_cat = CatBreed::Other(Skill {
+//         action: "龜派氣功".to_string(),
+//     });
+//     let frieza_cat = CatBreed::Alien { power: 530000 }; //戰鬥力53萬
+//     greeting(&goku_cat);
+//     greeting(&frieza_cat);
+//     frieza_cat.go();
+// }
 // fn greeting(cat: &CatBreed) {
 //     match cat {
 //         CatBreed::Mix(name, age) => println!("我是米克斯, 我叫{} 我今年{} 歲", name, age),
 //         _ => println!("我是品種貓"),
 //     }
 // }
-fn greeting(cat: &CatBreed) {
-    match cat {
-        CatBreed::Mix(name, age) => println!("我是米克斯, 我叫{} 我今年{} 歲", name, age),
-        CatBreed::Other(skill) => println!("使出絕招{}", skill.action),
-        CatBreed::Alien { power } => println!("我是戰鬥力是{}", power),
-        _ => println!("我是品種貓"),
+// fn greeting(cat: &CatBreed) {
+//     match cat {
+//         CatBreed::Mix(name, age) => println!("我是米克斯, 我叫{} 我今年{} 歲", name, age),
+//         CatBreed::Other(skill) => println!("使出絕招{}", skill.action),
+//         CatBreed::Alien { power } => println!("我是戰鬥力是{}", power),
+//         _ => println!("我是品種貓"),
+//     }
+// }
+// endregion: 列舉（Enum）
+
+// region: Option 不只是個選項
+//fn get_friends() -> Option<Vec<u8>> {}
+// fn get_friends(has_money: bool) -> Option<Vec<u8>> {
+//     if !has_money {
+//         return None;
+//     }
+//     let friends: Vec<u8> = vec![1, 2, 3, 4, 5];
+//     Some(friends)
+// }
+// fn get_friends(has_money: bool) -> Vec<u8> {
+//     if !has_money {
+//         return vec![];
+//     }
+//     let friends: Vec<u8> = vec![1, 2, 3, 4, 5];
+//     return friends;
+// }
+
+// fn withdraw(amount: u32) -> u32 {
+//     // 判斷帳戶餘額
+// }
+const BANK_BALANCE: u32 = 1000;
+fn withdraw(amount: u32) -> Result<u32, String> {
+    // 判斷帳戶餘額
+    if amount > BANK_BALANCE {
+        return Err(String::from("餘額不足"));
+    }
+    Ok(amount)
+}
+fn main() {
+    // let friends = get_friends(false);
+
+    // if friends.len() == 0 {
+    //     println!("我是邊緣人我驕傲！")
+    // } else {
+    //     println!("我有好多朋友 {:?}", friends)
+    // }
+
+    // let friends = get_friends(false);
+
+    // match friends {
+    //     None => println!("我是邊緣人我驕傲！"),
+    //     Some(list) => println!("我有好多朋友 {:?}", list),
+    // }
+    //let friends = get_friends(true);
+    // println!("{:?}", friends);
+    // println!("{:?}", friends.unwrap());
+
+    //
+    // println!("{}", friends.is_some());
+    // println!("{}", friends.is_none());
+    //
+    //println!("{:?}", friends.unwrap_or(vec![]));
+
+    match withdraw(100) {
+        Ok(amount) => println!("提領金額{}元", amount),
+        Err(message) => println!("提領失敗：{}", message),
     }
 }
-// endregion: 列舉（Enum）
+// endregion: Option 不只是個選項
