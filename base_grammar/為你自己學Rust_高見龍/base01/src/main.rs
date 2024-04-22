@@ -657,42 +657,121 @@
 // fn withdraw(amount: u32) -> u32 {
 //     // 判斷帳戶餘額
 // }
-const BANK_BALANCE: u32 = 1000;
-fn withdraw(amount: u32) -> Result<u32, String> {
-    // 判斷帳戶餘額
-    if amount > BANK_BALANCE {
-        return Err(String::from("餘額不足"));
-    }
-    Ok(amount)
+// const BANK_BALANCE: u32 = 1000;
+// fn withdraw(amount: u32) -> Result<u32, String> {
+//     // 判斷帳戶餘額
+//     if amount > BANK_BALANCE {
+//         return Err(String::from("餘額不足"));
+//     }
+//     Ok(amount)
+// }
+// fn main() {
+//     // let friends = get_friends(false);
+
+//     // if friends.len() == 0 {
+//     //     println!("我是邊緣人我驕傲！")
+//     // } else {
+//     //     println!("我有好多朋友 {:?}", friends)
+//     // }
+
+//     // let friends = get_friends(false);
+
+//     // match friends {
+//     //     None => println!("我是邊緣人我驕傲！"),
+//     //     Some(list) => println!("我有好多朋友 {:?}", list),
+//     // }
+//     //let friends = get_friends(true);
+//     // println!("{:?}", friends);
+//     // println!("{:?}", friends.unwrap());
+
+//     //
+//     // println!("{}", friends.is_some());
+//     // println!("{}", friends.is_none());
+//     //
+//     //println!("{:?}", friends.unwrap_or(vec![]));
+
+//     match withdraw(100) {
+//         Ok(amount) => println!("提領金額{}元", amount),
+//         Err(message) => println!("提領失敗：{}", message),
+//     }
+// }
+// endregion: Option 不只是個選項
+// region: 泛型（Generics）
+// struct  Rectangle{
+//     width:u32,
+//     height:u32,
+// }
+
+// struct RectangleU32 {
+//     width: u32,
+//     height: u32,
+// }
+// struct RectangleF32 {
+//     width: f32,
+//     height: f32,
+// }
+
+// struct Rectangle<T> {
+//     width: T,
+//     height: T,
+// }
+
+// fn add_number(a:i32,b:i32) -> i32{
+//     a+b
+// }
+// fn add_number<T>(a: T, b: T) -> T {
+//     a + b
+// }
+// fn add_number<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
+//     a + b
+// }
+// use std::ops::Add;
+// fn add_number<T: Add<Output = T>>(a: T, b: T) -> T {
+//     a + b
+// }
+
+// fn calc<T: std::ops::Add<Output = T> + std::ops::Sub<Output = T>>(a: T, b: T, c: T) -> T {
+//     a + b - c
+// }
+
+// use std::ops::{Add, Sub};
+// fn calc<T: Add<Output = T> + Sub<Output = T>>(a: T, b: T, c: T) -> T {
+//     a + b - c
+// }
+
+use std::ops::{Add, Sub};
+
+fn calc<T>(a: T, b: T, c: T) -> T
+where
+    T: Add<Output = T> + Sub<Output = T>,
+{
+    a + b - c
 }
 fn main() {
-    // let friends = get_friends(false);
+    // let rect_a=Rectangle{width:100,height:50};//沒問題
+    // let rect_b=Rectangle{width:38.5,height:19.5};//不行
 
-    // if friends.len() == 0 {
-    //     println!("我是邊緣人我驕傲！")
-    // } else {
-    //     println!("我有好多朋友 {:?}", friends)
-    // }
+    // let rect_a = RectanRectangleU32gle {
+    //     width: 100,
+    //     height: 50,
+    // };
+    // let rect_b = RectangleF32 {
+    //     width: 38.5,
+    //     height: 19.5,
+    // };
 
-    // let friends = get_friends(false);
+    // let rect_a = Rectangle {
+    //     width: 100,
+    //     height: 50,
+    // };
+    // let rect_b = Rectangle {
+    //     width: 38.5,
+    //     height: 19.5,
+    // };
 
-    // match friends {
-    //     None => println!("我是邊緣人我驕傲！"),
-    //     Some(list) => println!("我有好多朋友 {:?}", list),
-    // }
-    //let friends = get_friends(true);
-    // println!("{:?}", friends);
-    // println!("{:?}", friends.unwrap());
-
-    //
-    // println!("{}", friends.is_some());
-    // println!("{}", friends.is_none());
-    //
-    //println!("{:?}", friends.unwrap_or(vec![]));
-
-    match withdraw(100) {
-        Ok(amount) => println!("提領金額{}元", amount),
-        Err(message) => println!("提領失敗：{}", message),
-    }
+    // println!("{}", add_number(1, 2));
+    // println!("{}", add_number(3.1, 9.8));
+    //println!("{}", add_number(true, true));
 }
-// endregion: Option 不只是個選項
+
+// endregion: 泛型（Generics）
