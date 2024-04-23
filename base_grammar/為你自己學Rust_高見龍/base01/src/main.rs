@@ -739,39 +739,90 @@
 //     a + b - c
 // }
 
-use std::ops::{Add, Sub};
+// use std::ops::{Add, Sub};
 
-fn calc<T>(a: T, b: T, c: T) -> T
-where
-    T: Add<Output = T> + Sub<Output = T>,
-{
-    a + b - c
-}
-fn main() {
-    // let rect_a=Rectangle{width:100,height:50};//沒問題
-    // let rect_b=Rectangle{width:38.5,height:19.5};//不行
+// fn calc<T>(a: T, b: T, c: T) -> T
+// where
+//     T: Add<Output = T> + Sub<Output = T>,
+// {
+//     a + b - c
+// }
+// fn main() {
+//     // let rect_a=Rectangle{width:100,height:50};//沒問題
+//     // let rect_b=Rectangle{width:38.5,height:19.5};//不行
 
-    // let rect_a = RectanRectangleU32gle {
-    //     width: 100,
-    //     height: 50,
-    // };
-    // let rect_b = RectangleF32 {
-    //     width: 38.5,
-    //     height: 19.5,
-    // };
+//     // let rect_a = RectanRectangleU32gle {
+//     //     width: 100,
+//     //     height: 50,
+//     // };
+//     // let rect_b = RectangleF32 {
+//     //     width: 38.5,
+//     //     height: 19.5,
+//     // };
 
-    // let rect_a = Rectangle {
-    //     width: 100,
-    //     height: 50,
-    // };
-    // let rect_b = Rectangle {
-    //     width: 38.5,
-    //     height: 19.5,
-    // };
+//     // let rect_a = Rectangle {
+//     //     width: 100,
+//     //     height: 50,
+//     // };
+//     // let rect_b = Rectangle {
+//     //     width: 38.5,
+//     //     height: 19.5,
+//     // };
 
-    // println!("{}", add_number(1, 2));
-    // println!("{}", add_number(3.1, 9.8));
-    //println!("{}", add_number(true, true));
-}
+//     // println!("{}", add_number(1, 2));
+//     // println!("{}", add_number(3.1, 9.8));
+//     //println!("{}", add_number(true, true));
+// }
 
 // endregion: 泛型（Generics）
+
+// region: 錯誤處理（Error Handling）
+// fn bmi_calculator<T, U>(height: T, weight: U) -> Result<f64, String>
+// where
+//     T: Into<f64>,
+//     U: Into<f64>,
+// {
+//     let w = weight.into();
+//     let h = height.into() / 100.0;
+//     if w <= 0.0 || h <= 0.0 {
+//         return Err("輸入數值有誤".to_string());
+//     }
+//     Ok(w / (h * h))
+// }
+
+const BANK_BALANCE: u32 = 1000;
+fn withdraw(amount: u32) -> Result<u32, String> {
+    // 判斷帳戶餘額
+    if amount > BANK_BALANCE {
+        return Err(String::from("餘額不足"));
+    }
+    Ok(amount)
+}
+fn main() {
+    // match bmi_calculator(170, 70.5) {
+    //     Ok(result) => print!("{:.2}", result), //印出 24.39
+    //     Err(reason) => println!("{}", reason),
+    // }
+    // panic!("😱😱😱😱😱😱😱");
+
+    // hello();
+
+    // match withdraw(1200) {
+    //     Ok(amount) => println!("提領金額 {} 元", amount),
+    //     Err(message) => println!("提領失敗：{}", message),
+    // }
+    match withdraw(1200) {
+        Ok(amount) => println!("提領金額 {} 元", amount),
+        Err(_) => panic!("💣💥"),
+    }
+}
+// fn hello() {
+//     world();
+// }
+// fn world() {
+//     hey();
+// }
+// fn hey() {
+//     panic!("😱😱😱😱😱😱😱");
+// }
+// endregion: 錯誤處理（Error Handling）
