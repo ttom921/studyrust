@@ -790,32 +790,32 @@
 //     Ok(w / (h * h))
 // }
 
-const BANK_BALANCE: u32 = 1000;
-fn withdraw(amount: u32) -> Result<u32, String> {
-    // 判斷帳戶餘額
-    if amount > BANK_BALANCE {
-        return Err(String::from("餘額不足"));
-    }
-    Ok(amount)
-}
-fn main() {
-    // match bmi_calculator(170, 70.5) {
-    //     Ok(result) => print!("{:.2}", result), //印出 24.39
-    //     Err(reason) => println!("{}", reason),
-    // }
-    // panic!("😱😱😱😱😱😱😱");
+// const BANK_BALANCE: u32 = 1000;
+// fn withdraw(amount: u32) -> Result<u32, String> {
+//     // 判斷帳戶餘額
+//     if amount > BANK_BALANCE {
+//         return Err(String::from("餘額不足"));
+//     }
+//     Ok(amount)
+// }
+// fn main() {
+//     // match bmi_calculator(170, 70.5) {
+//     //     Ok(result) => print!("{:.2}", result), //印出 24.39
+//     //     Err(reason) => println!("{}", reason),
+//     // }
+//     // panic!("😱😱😱😱😱😱😱");
 
-    // hello();
+//     // hello();
 
-    // match withdraw(1200) {
-    //     Ok(amount) => println!("提領金額 {} 元", amount),
-    //     Err(message) => println!("提領失敗：{}", message),
-    // }
-    match withdraw(1200) {
-        Ok(amount) => println!("提領金額 {} 元", amount),
-        Err(_) => panic!("💣💥"),
-    }
-}
+//     // match withdraw(1200) {
+//     //     Ok(amount) => println!("提領金額 {} 元", amount),
+//     //     Err(message) => println!("提領失敗：{}", message),
+//     // }
+//     match withdraw(1200) {
+//         Ok(amount) => println!("提領金額 {} 元", amount),
+//         Err(_) => panic!("💣💥"),
+//     }
+// }
 // fn hello() {
 //     world();
 // }
@@ -826,3 +826,20 @@ fn main() {
 //     panic!("😱😱😱😱😱😱😱");
 // }
 // endregion: 錯誤處理（Error Handling）
+
+// region: 屬性（Attributes）
+
+// #[allow(dead_code)]
+#[derive(Debug)]
+struct Cat {
+    name: String,
+    age: u8,
+}
+fn main() {
+    let kitty = Cat {
+        name: String::from("kitty"),
+        age: 18,
+    };
+    println!("{:?}", kitty);
+}
+// endregion: 屬性（Attributes）
