@@ -845,29 +845,91 @@
 // endregion: 屬性（Attributes）
 // region: 測試（Test）
 
-#[cfg(test)]
-mod bmi {
-    use crate::bmi_calc;
-    #[test]
-    fn dummy() {
-        let result = 1 + 2;
-        assert_eq!(result, 3);
-    }
-    #[test]
-    fn test_calc() {
-        let result = bmi_calc(180, 65);
-        assert_eq!(result, 20.1);
-    }
-}
-fn bmi_calc<T, U>(height: T, weight: U) -> f64
-where
-    T: Into<f64>,
-    U: Into<f64>,
-{
-    let h = height.into() / 100.0;
-    let bmi = weight.into() / (h * h);
-    (bmi * 10.0).round() / 10.0
-}
+// #[cfg(test)]
+// mod bmi {
+//     use crate::bmi_calc;
+//     #[test]
+//     fn dummy() {
+//         let result = 1 + 2;
+//         assert_eq!(result, 3);
+//     }
+//     #[test]
+//     fn test_calc() {
+//         let result = bmi_calc(180, 65);
+//         assert_eq!(result, 20.1);
+//     }
+// }
+// fn bmi_calc<T, U>(height: T, weight: U) -> f64
+// where
+//     T: Into<f64>,
+//     U: Into<f64>,
+// {
+//     let h = height.into() / 100.0;
+//     let bmi = weight.into() / (h * h);
+//     (bmi * 10.0).round() / 10.0
+// }
 
-fn main() {}
+// fn main() {}
 // endregion: 測試（Test）
+
+// region: 模組（Module）
+// mod greeting {
+//     pub fn hi() {
+//         println!("Hi, Rust");
+//     }
+//     fn hey() {
+//         println!("Hey Rust");
+//     }
+// }
+// mod greeting {
+//     mod a {
+//         mod b {
+//             pub fn hi() {
+//                 println!("Hi, Rust");
+//             }
+//         }
+//     }
+// }
+
+// mod greeting {
+//     pub mod a {
+//         pub mod b {
+//             pub fn hi() {
+//                 println!("Hi, Rust");
+//             }
+//             pub fn hey() {
+//                 println!("Hey Rust");
+//             }
+//         }
+//     }
+// }
+
+//use greeting::a::b::hi;
+// use greeting::a::b::{hey, hi};
+
+mod greeting {
+    pub fn hi() {
+        // 想要在這裡呼叫 loudly 函數
+        //super::say_something::loudly("rust");
+        crate::say_something::loudly("crate rust")
+    }
+}
+mod say_something {
+    pub fn loudly(message: &str) {
+        println!("{}!!!!", message.to_uppercase());
+    }
+}
+fn main() {
+    //greeting::hi();
+
+    //greeting::a::b::hi();
+
+    //greeting::a::b::hi();
+
+    //hi();
+    // hi();
+    // hey();
+
+    greeting::hi();
+}
+// endregion: 模組（Module）
