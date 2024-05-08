@@ -907,29 +907,36 @@
 //use greeting::a::b::hi;
 // use greeting::a::b::{hey, hi};
 
-mod greeting {
-    pub fn hi() {
-        // 想要在這裡呼叫 loudly 函數
-        //super::say_something::loudly("rust");
-        crate::say_something::loudly("crate rust")
-    }
-}
-mod say_something {
-    pub fn loudly(message: &str) {
-        println!("{}!!!!", message.to_uppercase());
-    }
-}
-fn main() {
-    //greeting::hi();
+// mod greeting {
+//     pub fn hi() {
+//         // 想要在這裡呼叫 loudly 函數
+//         //super::say_something::loudly("rust");
+//         crate::say_something::loudly("crate rust")
+//     }
+// }
+// mod say_something {
+//     pub fn loudly(message: &str) {
+//         println!("{}!!!!", message.to_uppercase());
+//     }
+// }
+// fn main() {
+//     //greeting::hi();
 
-    //greeting::a::b::hi();
+//     //greeting::a::b::hi();
 
-    //greeting::a::b::hi();
+//     //greeting::a::b::hi();
 
-    //hi();
-    // hi();
-    // hey();
+//     //hi();
+//     // hi();
+//     // hey();
 
-    greeting::hi();
-}
+//     greeting::hi();
+// }
 // endregion: 模組（Module）
+
+// region: 套件（Crate）
+mod say_something;
+fn main() {
+    say_something::loudly("hello rust");
+}
+// endregion: 套件（Crate）
