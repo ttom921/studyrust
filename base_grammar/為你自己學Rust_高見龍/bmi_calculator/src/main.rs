@@ -1,11 +1,9 @@
 use std::io;
 mod bmi;
-
 fn main() {
-    // println!("請輸入您的身高(單立：公分)：");
-
+    // println!("請輸入您的身高（單位：公分）：");
     // let mut height = "".to_string();
-    // io::stdin().read_line(&mut height).expect("無法讀讀身高");
+    // io::stdin().read_line(&mut height).expect("無法讀取身高");
     // let height: f64 = height.trim().parse().expect("無法轉換");
 
     // println!("接著請輸入您的體重（單位：公斤）：");
@@ -14,15 +12,15 @@ fn main() {
     // io::stdin().read_line(&mut weight).expect("無法讀取體重");
     // let weight: f64 = weight.trim().parse().expect("無法轉換");
 
-    let height = ask_quesion("請輸入您的身高(單立：公分)：");
-    let weight = ask_quesion("接著請輸入您的體重（單位：公斤）：");
+    let height = ask_question("請輸入您的身高（單位：公分）：");
+    let weight = ask_question("接著請輸入您的體重（單位：公斤）：");
 
     let bmi = bmi::calculator(height, weight);
     let message = if bmi >= 0.0 && bmi <= 18.5 {
         "「體重過輕」，需要多運動，均衡飲食，以增加體能，維持健康！"
     } else if bmi > 18.5 && bmi <= 24.0 {
         "恭喜！「健康體重」，要繼續保持！"
-    } else if bmi > 24.0 && bmi < 27.0 {
+    } else if bmi > 24.0 && bmi <= 27.0 {
         "「體重過重」了，要小心囉，趕快力行「健康體重管理」！"
     } else if bmi > 27.0 {
         "啊～「肥胖」，需要立刻力行「健康體重管理」囉！"
@@ -30,10 +28,11 @@ fn main() {
         "無法計算"
     };
 
-    println!("您的 BMI是 {},{}", bmi, message);
+    println!("您的 BMI 是 {}，{}", bmi, message);
 }
-fn ask_quesion(question: &str) -> f64 {
+fn ask_question(question: &str) -> f64 {
     println!("{}", question);
+
     let mut input = String::new();
     io::stdin().read_line(&mut input).expect("無法讀取輸入");
 
