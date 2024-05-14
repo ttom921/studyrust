@@ -935,8 +935,82 @@
 // endregion: 模組（Module）
 
 // region: 套件（Crate）
-mod say_something;
-fn main() {
-    say_something::loudly("hello rust");
-}
+// mod say_something;
+// fn main() {
+//     say_something::loudly("hello rust");
+// }
 // endregion: 套件（Crate）
+// region: 再看生命週期（Lifetime revisit）
+// struct Cat {
+//     name: String,
+//     age: u8,
+// }
+// struct Cat {
+//     name: &str,
+//     age: u8,
+// }
+// #[derive(Debug)]
+// struct Cat<'a> {
+//     name: &'a str,
+//     age: u8,
+// }
+
+// impl Cat {
+//     fn sae_hello(&self) {
+//         println!("Hello");
+//     }
+// }
+// impl<'a> Cat<'a> {
+//     fn sae_hello(&self) {
+//         println!("Hello");
+//     }
+// }
+// impl Cat<'_> {
+//     fn sae_hello(&self) {
+//         println!("Hello");
+//     }
+// }
+#[derive(Debug)]
+struct Cat<'a, T> {
+    name: &'a str,
+    age: T,
+}
+impl<T> Cat<'_, T> {
+    fn sae_hello(&self) {
+        println!("Hello");
+    }
+}
+
+enum CatBreed<'a> {
+    Persian,           // 波斯貓
+    AmericanShorthair, // 美國短毛貓
+    Mix(&'a str, u8),  // 米克斯
+}
+
+impl CatBreed<'_> {
+    fn say_something() {
+        println!("Hey!");
+    }
+}
+fn main() {
+    // let kitty = Cat {
+    //     name: String::from("Kitty"),
+    //     age: 12,
+    // };
+    // let kitty = Cat {
+    //     name: "Kitty",
+    //     age: 12,
+    // };
+    let cat_name = "Kitty"; //------------+ 'cat_name
+                            //            |
+    let kitty = Cat {
+        //--+ 'kitty  |
+        name: cat_name, //  |         |
+        age: 12,        //  |         |
+    }; //  |         |
+       //  |         |
+    println!("{:?}", kitty); //  |         |
+                             //--+         |
+} //------------+
+
+// endregion: 再看生命週期（Lifetime revisit）
