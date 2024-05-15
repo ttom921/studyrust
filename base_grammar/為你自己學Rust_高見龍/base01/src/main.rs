@@ -970,47 +970,102 @@
 //         println!("Hello");
 //     }
 // }
-#[derive(Debug)]
-struct Cat<'a, T> {
-    name: &'a str,
-    age: T,
-}
-impl<T> Cat<'_, T> {
-    fn sae_hello(&self) {
-        println!("Hello");
-    }
-}
+// #[derive(Debug)]
+// struct Cat<'a, T> {
+//     name: &'a str,
+//     age: T,
+// }
+// impl<T> Cat<'_, T> {
+//     fn sae_hello(&self) {
+//         println!("Hello");
+//     }
+// }
 
-enum CatBreed<'a> {
-    Persian,           // 波斯貓
-    AmericanShorthair, // 美國短毛貓
-    Mix(&'a str, u8),  // 米克斯
-}
+// enum CatBreed<'a> {
+//     Persian,           // 波斯貓
+//     AmericanShorthair, // 美國短毛貓
+//     Mix(&'a str, u8),  // 米克斯
+// }
 
-impl CatBreed<'_> {
-    fn say_something() {
-        println!("Hey!");
+// impl CatBreed<'_> {
+//     fn say_something() {
+//         println!("Hey!");
+//     }
+// }
+// fn main() {
+//     // let kitty = Cat {
+//     //     name: String::from("Kitty"),
+//     //     age: 12,
+//     // };
+//     // let kitty = Cat {
+//     //     name: "Kitty",
+//     //     age: 12,
+//     // };
+//     let cat_name = "Kitty"; //------------+ 'cat_name
+//                             //            |
+//     let kitty = Cat {
+//         //--+ 'kitty  |
+//         name: cat_name, //  |         |
+//         age: 12,        //  |         |
+//     }; //  |         |
+//        //  |         |
+//     println!("{:?}", kitty); //  |         |
+//                              //--+         |
+// } //------------+
+
+// endregion: 再看生命週期（Lifetime revisit）
+
+// region: 把東西印出來！
+
+// struct Cat {
+//     name: String,
+// }
+// use std::fmt::{Debug, Display, Formatter, Result};
+
+// impl Display for Cat {
+//     fn fmt(&self, f: &mut Formatter) -> Result {
+//         write!(f, "貓兒:{}", self.name)
+//     }
+// }
+// impl Debug for Cat {
+//     fn fmt(&self, f: &mut Formatter) -> Result {
+//         write!(f, "貓兒:{}", self.name)
+//     }
+// }
+
+// #[derive(Debug)]
+// struct Cat {
+//     name: String,
+// }
+
+struct Cat {
+    name: String,
+}
+use std::fmt::{Display, Formatter, Result};
+
+impl Display for Cat {
+    fn fmt(&self, f: &mut Formatter) -> Result {
+        write!(f, "{}", self.name.to_uppercase())
     }
 }
 fn main() {
     // let kitty = Cat {
     //     name: String::from("Kitty"),
-    //     age: 12,
     // };
-    // let kitty = Cat {
-    //     name: "Kitty",
-    //     age: 12,
-    // };
-    let cat_name = "Kitty"; //------------+ 'cat_name
-                            //            |
-    let kitty = Cat {
-        //--+ 'kitty  |
-        name: cat_name, //  |         |
-        age: 12,        //  |         |
-    }; //  |         |
-       //  |         |
-    println!("{:?}", kitty); //  |         |
-                             //--+         |
-} //------------+
+    // println!("{}", kitty);
+    // println!("{:?}", kitty);
 
-// endregion: 再看生命週期（Lifetime revisit）
+    // let kitty = Cat {
+    //     name: String::from("Kitty"),
+    // };
+    // println!("{:?}", kitty);
+
+    // let message = format!("你好，我是 {}", "Hello Kitty");
+    // println!("{}", message);
+
+    let kitty = Cat {
+        name: String::from("kitty"),
+    };
+    println!("{}", kitty.to_string()); // 印出 KITTY
+}
+// endregion: 把東西印出來！
