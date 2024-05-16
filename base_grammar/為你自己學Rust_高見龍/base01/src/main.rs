@@ -1038,34 +1038,65 @@
 //     name: String,
 // }
 
-struct Cat {
-    name: String,
-}
-use std::fmt::{Display, Formatter, Result};
+// struct Cat {
+//     name: String,
+// }
+// use std::fmt::{Display, Formatter, Result};
 
-impl Display for Cat {
-    fn fmt(&self, f: &mut Formatter) -> Result {
-        write!(f, "{}", self.name.to_uppercase())
-    }
-}
-fn main() {
-    // let kitty = Cat {
-    //     name: String::from("Kitty"),
-    // };
-    // println!("{}", kitty);
-    // println!("{:?}", kitty);
+// impl Display for Cat {
+//     fn fmt(&self, f: &mut Formatter) -> Result {
+//         write!(f, "{}", self.name.to_uppercase())
+//     }
+// }
+// fn main() {
+//     // let kitty = Cat {
+//     //     name: String::from("Kitty"),
+//     // };
+//     // println!("{}", kitty);
+//     // println!("{:?}", kitty);
 
-    // let kitty = Cat {
-    //     name: String::from("Kitty"),
-    // };
-    // println!("{:?}", kitty);
+//     // let kitty = Cat {
+//     //     name: String::from("Kitty"),
+//     // };
+//     // println!("{:?}", kitty);
 
-    // let message = format!("你好，我是 {}", "Hello Kitty");
-    // println!("{}", message);
+//     // let message = format!("你好，我是 {}", "Hello Kitty");
+//     // println!("{}", message);
 
-    let kitty = Cat {
-        name: String::from("kitty"),
-    };
-    println!("{}", kitty.to_string()); // 印出 KITTY
-}
+//     let kitty = Cat {
+//         name: String::from("kitty"),
+//     };
+//     println!("{}", kitty.to_string()); // 印出 KITTY
+// }
 // endregion: 把東西印出來！
+
+// region: 閉包（Closure）
+fn main() {
+    // let say_hello = || println!("Hello Rust");
+    // say_hello();
+
+    // let add_numbers = |x, y| x + y;
+    // println!("計算結果：{}", add_numbers(1, 2));
+
+    // let add_numbers = |x, y| {
+    //     println!("Hello Rust!");
+    //     println!("Hello Again!");
+    //     //其它實作程式碼
+    //     x + y
+    // };
+    // println!("計算結果：{}", add_numbers(1, 2));
+
+    // let add_numbers = |x, y| x + y;
+    // println!("計算結果: {}", add_numbers(1, 2));
+    // println!("計算結果: {}", add_numbers(0.1, 0.2));
+
+    // let n = 100;
+    // let add_one = || n + 1;
+    // println!("結果：{}", add_one()); //印出101
+
+    //let n = 100;
+}
+// fn add_one() {
+//     return n + 1;
+// }
+// endregion: 閉包（Closure）
