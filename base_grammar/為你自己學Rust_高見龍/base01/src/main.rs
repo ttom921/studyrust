@@ -1071,32 +1071,59 @@
 // endregion: 把東西印出來！
 
 // region: 閉包（Closure）
-fn main() {
-    // let say_hello = || println!("Hello Rust");
-    // say_hello();
+// fn main() {
+//     // let say_hello = || println!("Hello Rust");
+//     // say_hello();
 
-    // let add_numbers = |x, y| x + y;
-    // println!("計算結果：{}", add_numbers(1, 2));
+//     // let add_numbers = |x, y| x + y;
+//     // println!("計算結果：{}", add_numbers(1, 2));
 
-    // let add_numbers = |x, y| {
-    //     println!("Hello Rust!");
-    //     println!("Hello Again!");
-    //     //其它實作程式碼
-    //     x + y
-    // };
-    // println!("計算結果：{}", add_numbers(1, 2));
+//     // let add_numbers = |x, y| {
+//     //     println!("Hello Rust!");
+//     //     println!("Hello Again!");
+//     //     //其它實作程式碼
+//     //     x + y
+//     // };
+//     // println!("計算結果：{}", add_numbers(1, 2));
 
-    // let add_numbers = |x, y| x + y;
-    // println!("計算結果: {}", add_numbers(1, 2));
-    // println!("計算結果: {}", add_numbers(0.1, 0.2));
+//     // let add_numbers = |x, y| x + y;
+//     // println!("計算結果: {}", add_numbers(1, 2));
+//     // println!("計算結果: {}", add_numbers(0.1, 0.2));
 
-    // let n = 100;
-    // let add_one = || n + 1;
-    // println!("結果：{}", add_one()); //印出101
+//     // let n = 100;
+//     // let add_one = || n + 1;
+//     // println!("結果：{}", add_one()); //印出101
 
-    //let n = 100;
-}
+//     //let n = 100;
+// }
 // fn add_one() {
 //     return n + 1;
 // }
 // endregion: 閉包（Closure）
+
+// region: 把函數丟來丟去的高階函數
+
+// fn operation<F: Fn(i32, i32) -> i32>(n: i32, m: i32, op: F) -> i32 {
+//     op(n, m)
+// }
+fn operation<F>(n: i32, m: i32, op: F) -> i32
+where
+    F: Fn(i32, i32) -> i32,
+{
+    op(n, m)
+}
+fn add(x: i32, y: i32) -> i32 {
+    x + y
+}
+fn main() {
+    let minus = |a, b| a - b;
+    let result1 = operation(10, 20, add);
+    let result2 = operation(10, 20, minus);
+
+    println!("{}", result1); // 印出 30
+    println!("{}", result2); // 印出 -10
+
+    let result3 = operation(10, 20, |x, y| x * y);
+    println!("{}", result3); // 印出 200
+}
+// endregion: 把函數丟來丟去的高階函數
